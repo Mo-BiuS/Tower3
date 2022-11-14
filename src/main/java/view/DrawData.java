@@ -1,5 +1,6 @@
 package view;
 
+import model.Tool;
 import processing.core.PApplet;
 
 public class DrawData {
@@ -10,13 +11,13 @@ public class DrawData {
         this.textSize = textSize;
     }
 
-    public void drawToolData(int i, boolean simulation, PApplet p){
+    public void drawToolData(Tool t, boolean simulation, PApplet p){
         p.fill(255);
         p.textSize(textSize);
         String str = "";
 
-        if(i == 0)str+="TILE_EDIT";
-        else if(i == 1)str+="TOWER_EDIT";
+        if(t == Tool.PLACE_TILE)str+="TILE_EDIT";
+        else if(t == Tool.PLACE_TOWER)str+="TOWER_EDIT";
 
         str +=" | ";
 

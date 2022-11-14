@@ -3,6 +3,7 @@ package model.enemy;
 import lombok.Getter;
 import model.doublet.Doublet;
 import model.tile.TileList;
+import model.tower.TowerList;
 import service.Pathfinder;
 
 import java.util.ArrayList;
@@ -22,10 +23,10 @@ public class EnemyList {
     public void act() {
         enemyList.forEach(e -> e.act());
     }
-    public void setPath(TileList t){
+    public void setPath(TileList tile, TowerList tower){
         for(Enemy e : enemyList){
             e.clearTarget();
-            e.addTarget(Pathfinder.findWayOut(e.getPos(), t));
+            e.addTarget(Pathfinder.findWayOut(e.getPos(), tile, tower));
         }
     }
 

@@ -6,6 +6,11 @@ import model.enemy.EnemyList;
 import model.enemy.EnemyType;
 import model.tile.TileList;
 import model.tile.TileType;
+import model.tower.Tower;
+import model.tower.TowerList;
+import model.tower.TowerType;
+import model.tower.missile.Missile;
+import model.tower.missile.MissileList;
 import processing.core.PApplet;
 
 import java.awt.*;
@@ -32,8 +37,7 @@ public class DrawBoard {
     }
     public void drawEnemy(EnemyList enemyList, PApplet p){
         p.strokeWeight(1);
-        for (int i = 0; i < enemyList.getEnemyList().size(); i++){
-            Enemy e = enemyList.getEnemyList().get(i);
+        for (Enemy e : enemyList.getEnemyList()){
             EnemyType t = e.getType();
             p.fill(t.color.getRed(),t.color.getGreen(),t.color.getBlue());
             p.ellipse(dx+e.getPosX()*size+size/2,
@@ -53,5 +57,27 @@ public class DrawBoard {
 
     public void clear(PApplet p) {
         p.background(50);
+    }
+
+    public void drawTower(TowerList towerList, PApplet p) {
+        p.strokeWeight(1);
+        for (Tower e : towerList.getTowerList()){
+            if(e.getTowerType() == TowerType.HEAVY)p.fill(150,100,100);
+            else if(e.getTowerType() == TowerType.LIGHT)p.fill(255,150,150);
+            p.ellipse(dx+e.getPosX()*size+size/2,
+                    dy+e.getPosY()*size+size/2,
+                    3*size/4, 3*size/4);
+
+            drawMissile(e.getMissileList(), p);
+        }
+    }
+    public void drawMissile(MissileList missileList, PApplet p){
+        p.strokeWeight(1);
+        p.fill(0);
+        for (Missile m : missileList.getMissileList()){
+            p.ellipse(dx+m.getPosX()*size+size/2,
+                    dy+m.getPosY()*size+size/2,
+                    4, 4);
+        }
     }
 }

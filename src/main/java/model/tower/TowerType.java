@@ -1,15 +1,19 @@
 package model.tower;
 
-public enum TowerType {
-    LIGHT(1,100, 500),
-    HEAVY(4,400,1000);
+import model.tower.missile.MissileType;
 
-     int dmg;
+public enum TowerType {
+    LIGHT(MissileType.SIMPLE,10,100, 1200),
+    HEAVY(MissileType.SIMPLE,4,400,400);
+
+    MissileType missileType;
+    int range;
      int cost;
      int reloadTime;
 
-    TowerType(int dmg, int cost, int reloadTime){
-        this.dmg = dmg;
+    TowerType(MissileType missileType, int range, int cost, int reloadTime){
+        this.range = range;
+        this.missileType = missileType;
         this.cost = cost;
         this.reloadTime = reloadTime;
     }

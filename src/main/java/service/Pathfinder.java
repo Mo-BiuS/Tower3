@@ -2,12 +2,13 @@ package service;
 
 import model.doublet.Doublet;
 import model.tile.TileList;
+import model.tower.TowerList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pathfinder {
-    public static List<Doublet> findWayOut(Doublet from, TileList inside){
+    public static List<Doublet> findWayOut(Doublet from, TileList inside, TowerList tower){
         int[][] pathMap = new int[inside.getSizeX()][inside.getSizeY()];
         List<Doublet> listExit = inside.getExitPoint();
         Doublet exit = null;
@@ -32,19 +33,19 @@ public class Pathfinder {
                 for (int y = 0; y < inside.getSizeY(); y++) {
                     for (int x = 0; x < inside.getSizeX(); x++) {
                         if (pathMap[x][y] == i) {
-                            if (inside.canGoNorth(x, y) && pathMap[x][y - 1] == 0) {
+                            if (inside.canGoNorth(x, y) && pathMap[x][y - 1] == 0  && !tower.towerAt(x,y-1)) {
                                 pathMap[x][y - 1] = i + 1;
                                 exitNotFound = false;
                             }
-                            if (inside.canGoSouth(x, y) && pathMap[x][y + 1] == 0) {
+                            if (inside.canGoSouth(x, y) && pathMap[x][y + 1] == 0  && !tower.towerAt(x,y+1)) {
                                 pathMap[x][y + 1] = i + 1;
                                 exitNotFound = false;
                             }
-                            if (inside.canGoEast(x, y) && pathMap[x + 1][y] == 0) {
+                            if (inside.canGoEast(x, y) && pathMap[x + 1][y] == 0  && !tower.towerAt(x+1,y)) {
                                 pathMap[x + 1][y] = i + 1;
                                 exitNotFound = false;
                             }
-                            if (inside.canGoWest(x, y) && pathMap[x - 1][y] == 0) {
+                            if (inside.canGoWest(x, y) && pathMap[x - 1][y] == 0  && !tower.towerAt(x-1,y)) {
                                 pathMap[x - 1][y] = i + 1;
                                 exitNotFound = false;
                             }

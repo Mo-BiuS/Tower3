@@ -6,9 +6,9 @@ import java.awt.*;
 
 public enum EnemyType {
 
-    LIGHT(Color.YELLOW, 12,6,0.05f, 1,"SET1.png"),
-    MEDIUM(Color.YELLOW, 16, 12, 0.025f,2,null),
-    HEAVY(Color.ORANGE, 24, 24, 0.02f,4,null);
+    LIGHT(Color.YELLOW, 12,6,0.025f, 1,"SET1.png"),
+    MEDIUM(Color.YELLOW, 16, 12, 0.015f,2,null),
+    HEAVY(Color.ORANGE, 24, 24, 0.005f,4,null);
 
     public final Color color;
     public final int size;
